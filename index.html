@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Oportunidad de Mercado - Casa Llave en Mano en Miami-Dade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Neutral Background */
+            color: #212529;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: #0A58CA; /* Darker Blue for titles */
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #0D6EFD; /* Main Blue */
+            border-radius: 2px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem; /* More rounded corners */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #0D6EFD; /* Main Blue */
+            line-height: 1.1;
+        }
+        .stat-label {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-top: 0.5rem;
+        }
+        .process-step {
+            background-color: #E3F2FD; /* Light Blue for process steps */
+            border-left: 5px solid #0D6EFD; /* Main Blue */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .btn-cta {
+            background-color: #0D6EFD; /* Main Blue */
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* Pill shape */
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-cta:hover {
+            background-color: #0A58CA; /* Darker Blue */
+        }
+
+    </style>
+    <!-- 
+        Plan de Narrativa y Estructura:
+        1.  Header: Título, introducción al problema del mercado.
+        2.  Sección 1: La Solución "Casa Llave en Mano" y su Propuesta de Valor (con datos clave).
+        3.  Sección 2: Entendiendo la Necesidad del Mercado en Miami-Dade (Desafíos comunes).
+        4.  Sección 3: Nuestro Proceso Simplificado (Visualización del flujo).
+        5.  Sección 4: Modelos Adaptados al Mercado Local.
+        6.  Sección 5: Perfil del Propietario/Inversor Objetivo.
+        7.  Sección 6: Gestión de Riesgos: Un Enfoque Transparente.
+        8.  Sección 7: Llamada a la Acción.
+
+        Selección de Visualizaciones (Confirmando NO SVG, NO MERMAID JS):
+        -   Propuesta de Valor: HTML/CSS Cards con iconos Unicode y "Single Big Number" para precio/tiempo (HTML).
+        -   Desafíos del Mercado: Chart.js Bar Chart (Canvas).
+        -   Proceso: Diagrama de flujo con HTML/CSS y Tailwind (divs, borders).
+        -   Modelos: HTML/CSS Cards.
+        -   Perfil: HTML/CSS Cards.
+        -   Riesgos: HTML Table con Tailwind.
+        
+        Paleta de Colores Seleccionada: "Brilliant Blues" (Inferido y aplicado)
+        - Main Blue: #0D6EFD
+        - Accent Blue (lighter): #7EBBF9
+        - Darker Blue/Text: #0A58CA
+        - Neutrals: #FFFFFF, #F8F9FA, #E3F2FD
+    -->
+</head>
+<body class="antialiased">
+
+    <header class="bg-gradient-to-r from-[#0A58CA] to-[#0D6EFD] text-white py-16 text-center rounded-b-3xl">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Maximizando el Valor de Terrenos en Miami-Dade</h1>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+                Análisis de la oportunidad para propietarios e inversionistas: Cómo el modelo "Casa Llave en Mano" simplifica la construcción y potencia la rentabilidad en un mercado dinámico.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 space-y-16">
+
+        <section id="solucion-valor">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">La Solución: "Casa Llave en Mano"</h2>
+            <p class="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+                Construir en terreno propio puede ser complejo. Nuestro servicio integral "Casa Llave en Mano" está diseñado para eliminar la incertidumbre, ofreciendo un camino claro desde el diseño hasta la entrega.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="card text-center">
+                    <div class="stat-number">$320K</div>
+                    <div class="stat-label">Precio Fijo de Construcción</div>
+                    <p class="text-sm text-gray-500 mt-2">(Sujeto a evaluación básica del terreno en Miami-Dade)</p>
+                </div>
+                <div class="card text-center">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Meses para Entrega</div>
+                    <p class="text-sm text-gray-500 mt-2">(Llave en mano, bajo supervisión continua)</p>
+                </div>
+                <div class="card text-center flex flex-col justify-center">
+                    <span class="text-4xl mb-2">🔑</span>
+                    <h3 class="text-xl font-semibold text-[#0A58CA] mb-1">Todo Incluido</h3>
+                    <p class="text-gray-600 text-sm">Planos, permisos, mano de obra, acabados. Sin sorpresas.</p>
+                </div>
+                <div class="card text-center flex flex-col justify-center">
+                    <span class="text-4xl mb-2">🏦</span>
+                    <h3 class="text-xl font-semibold text-[#0A58CA] mb-1">Gestión Hipotecaria</h3>
+                    <p class="text-gray-600 text-sm">Facilitamos el acceso a financiamiento para la construcción.</p>
+                </div>
+                <div class="card text-center flex flex-col justify-center">
+                    <span class="text-4xl mb-2">📈</span>
+                    <h3 class="text-xl font-semibold text-[#0A58CA] mb-1">Opciones de Monetización</h3>
+                    <p class="text-gray-600 text-sm">Asistencia opcional para renta o venta post-construcción.</p>
+                </div>
+                 <div class="card text-center flex flex-col justify-center">
+                    <span class="text-4xl mb-2">✅</span>
+                    <h3 class="text-xl font-semibold text-[#0A58CA] mb-1">Calidad y Garantía</h3>
+                    <p class="text-gray-600 text-sm">Controles rigurosos y entrega con manual del propietario.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="necesidad-mercado">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">El Pulso del Mercado en Miami-Dade</h2>
+            <p class="text-center text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+                Muchos propietarios de terrenos en Miami-Dade enfrentan obstáculos para desarrollar sus propiedades. Datos indican que una porción significativa de terrenos listados en MLS permanecen más de 4 meses sin planos de construcción, evidenciando una brecha en el mercado.
+            </p>
+            <p class="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+                 El servicio "Casa Llave en Mano" aborda directamente estos desafíos, ofreciendo una solución estructurada y eficiente.
+            </p>
+            <div class="chart-container mx-auto">
+                <canvas id="marketChallengesChart"></canvas>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-4">Gráfico ilustrativo basado en los desafíos comunes que nuestro servicio busca resolver.</p>
+        </section>
+
+        <section id="proceso">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">Un Proceso Transparente y Eficaz</h2>
+            <p class="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+                Desde el contacto inicial hasta la entrega de llaves, nuestro proceso está diseñado para la claridad y la eficiencia, manteniendo al cliente informado en cada etapa.
+            </p>
+            <div class="space-y-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="process-step"><strong>1. Contacto y Asesoría Inicial:</strong> Entendemos tus necesidades (sin compromiso).</div>
+                    <div class="process-step"><strong>2. Modelo y Terreno:</strong> Selección y revisión preliminar.</div>
+                    <div class="process-step"><strong>3. Contrato Claro:</strong> Precio y cronograma fijos.</div>
+                    <div class="process-step"><strong>4. Financiamiento (Opcional):</strong> Te apoyamos en la gestión.</div>
+                    <div class="process-step"><strong>5. Permisos y Planificación:</strong> Nos encargamos de la burocracia.</div>
+                    <div class="process-step"><strong>6. Construcción por Fases:</strong> Con inspecciones de calidad.</div>
+                    <div class="process-step"><strong>7. Entrega Llave en Mano:</strong> Tu casa lista, con garantía.</div>
+                    <div class="process-step"><strong>8. Post-Construcción (Opcional):</strong> Apoyo en renta o venta.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="modelos">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">Modelos Diseñados para el Estilo de Vida de Miami</h2>
+             <p class="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+                Ofrecemos diseños funcionales y modernos, pensados para maximizar el espacio y el confort, adaptándose a las normativas y preferencias locales.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <img src="https://placehold.co/600x400/7EBBF9/FFFFFF?text=Modelo+1+(MADE)" alt="Modelo 1 MADE" class="rounded-lg mb-4 w-full h-64 object-cover">
+                    <h3 class="text-2xl font-semibold text-[#0A58CA] mb-2">Modelo 1 (MADE)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 pl-2">
+                        <li>Tamaño Aprox: <strong>1,350 ft²</strong></li>
+                        <li>Habitaciones: <strong>3</strong></li>
+                        <li>Baños: <strong>2</strong></li>
+                        <li>Garage: <strong>Sí</strong></li>
+                        <li>Características: Estilo tradicional, óptima distribución.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <img src="https://placehold.co/600x400/7EBBF9/FFFFFF?text=Modelo+2+(Variante)" alt="Modelo 2 Variante" class="rounded-lg mb-4 w-full h-64 object-cover">
+                    <h3 class="text-2xl font-semibold text-[#0A58CA] mb-2">Modelo 2 (Variante)</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 pl-2">
+                        <li>Tamaño Aprox: <strong>1,400 ft²</strong></li>
+                        <li>Habitaciones: <strong>3</strong></li>
+                        <li>Baños: <strong>2</strong></li>
+                        <li>Garage: <strong>Convertible</strong></li>
+                        <li>Características: Flexibilidad, posible **efficiency** independiente.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="cliente-objetivo">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">¿Para Quién es Ideal Este Servicio?</h2>
+            <p class="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+                Nuestro modelo "Casa Llave en Mano" está dirigido a un segmento específico del mercado que busca valor, eficiencia y tranquilidad.
+            </p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-[#0A58CA] mb-2">Propietarios de Terrenos</h3>
+                    <p class="text-gray-600">Que poseen terrenos sin hipoteca y desean construir sin complicaciones.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-[#0A58CA] mb-2">Inversionistas Inmobiliarios</h3>
+                    <p class="text-gray-600">Que buscan construir para rentar o revender, optimizando tiempos y costos.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-[#0A58CA] mb-2">Clientes con Financiamiento</h3>
+                    <p class="text-gray-600">Que califican o pueden calificar para un préstamo de construcción y valoran un proceso gestionado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gestion-riesgos">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">Mitigación de Riesgos: Nuestro Compromiso</h2>
+            <p class="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+                Entendemos las preocupaciones comunes en proyectos de construcción. Nuestro modelo se enfoca en minimizar estos riesgos a través de una planificación y gestión proactiva.
+            </p>
+            <div class="overflow-x-auto bg-white p-6 rounded-lg shadow-lg">
+                <table class="w-full min-w-[600px]">
+                    <thead class="bg-[#E3F2FD]">
+                        <tr>
+                            <th class="p-3 text-left font-semibold text-[#0A58CA]">Riesgo Potencial</th>
+                            <th class="p-3 text-left font-semibold text-[#0A58CA]">Estrategia de Mitigación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 text-gray-700">Retrasos en obra</td>
+                            <td class="p-3 text-gray-700">Planificación detallada y buffer de tiempo. Comunicación constante.</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-3 text-gray-700">Incremento de costos de materiales</td>
+                            <td class="p-3 text-gray-700">Precio fijo en contrato. Compra anticipada de materiales clave y acuerdos con proveedores.</td>
+                        </tr>
+                         <tr class="border-b border-gray-200">
+                            <td class="p-3 text-gray-700">Dificultad para obtener financiamiento</td>
+                            <td class="p-3 text-gray-700">Alianzas estratégicas con múltiples entidades financieras y lenders privados. Asesoramiento.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 text-gray-700">Permisos y licencias demorados</td>
+                            <td class="p-3 text-gray-700">Gestión temprana y proactiva con asesoría especializada y conocimiento de procesos locales.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="cta" class="text-center py-16 bg-[#E3F2FD] rounded-xl">
+            <h2 class="text-3xl font-bold text-[#0A58CA] mb-6">Transforma Tu Terreno en un Hogar o Inversión Rentable</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-xl mx-auto">
+                Si posees un terreno en Miami-Dade y buscas una solución de construcción eficiente y con precio fijo, ¡contáctanos!
+            </p>
+            <a href="#" class="btn-cta">Solicitar Asesoría Gratuita</a>
+            <p class="mt-6 text-sm text-gray-600">Jorge & Ana | Tu casa. Tu terreno. Nuestra experiencia.</p>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 bg-gray-800 text-gray-300">
+        <p>&copy; <span id="currentYear"></span> Casa Llave en Mano. Todos los derechos reservados.</p>
+        <p class="text-xs mt-1">Infografía de Mercado y Oportunidad.</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Chart.js: Desafíos del Mercado
+        const marketChallengesCtx = document.getElementById('marketChallengesChart').getContext('2d');
+        
+        function wrapText(text, maxWidth) {
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 < maxWidth) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const rawLabels = [
+            'Complejidad en Gestión de Permisos', 
+            'Control de Presupuesto y Costos Ocultos', 
+            'Coordinación de Múltiples Contratistas', 
+            'Tiempos de Construcción Extensos e Inciertos',
+            'Falta de Transparencia en el Proceso'
+        ];
+
+        const chartLabels = rawLabels.map(label => {
+            if (label.length > 16) { // Approx. character limit for good display
+                return wrapText(label, 16); // Using 16 as a soft limit per line
+            }
+            return label;
+        });
+
+        const marketChallengesChart = new Chart(marketChallengesCtx, {
+            type: 'bar',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+                    label: 'Nivel de Desafío Percibido por Propietarios (Ilustrativo)',
+                    data: [85, 80, 75, 70, 65], // Datos ilustrativos
+                    backgroundColor: '#7EBBF9', // Accent Blue
+                    borderColor: '#0D6EFD', // Main Blue
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Barras Horizontales para mejor lectura de etiquetas largas
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Impacto del Desafío (Escala Ilustrativa 0-100)'
+                        }
+                    },
+                    y: {
+                         ticks: {
+                            autoSkip: false, // Asegura que todas las etiquetas se muestren
+                         }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
